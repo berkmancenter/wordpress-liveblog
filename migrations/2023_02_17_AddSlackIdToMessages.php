@@ -8,7 +8,7 @@ class AddSlackIdToMessages extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       ADD COLUMN
         slack_id varchar(50) NOT NULL;
     ";
@@ -19,7 +19,7 @@ class AddSlackIdToMessages extends AbstractMigration {
     global $wpdb;
     $wpdb->query("
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       DROP COLUMN
         slack_id"
     );

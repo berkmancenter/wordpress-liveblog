@@ -1,7 +1,7 @@
 <?php
 
 use DeliciousBrains\WPMigrations\Database\AbstractMigration;
-use \SlackLiveblog\Db;
+use \WordpressLiveblog\Db;
 
 class AddRefreshIntervalToChannels extends AbstractMigration {
   public function run() {
@@ -9,7 +9,7 @@ class AddRefreshIntervalToChannels extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channels
+        {$wpdb->prefix}wordpress_liveblog_channels
       ADD COLUMN
         refresh_interval SMALLINT NOT NULL;
     ";
@@ -25,7 +25,7 @@ class AddRefreshIntervalToChannels extends AbstractMigration {
     global $wpdb;
     $wpdb->query("
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channels
+        {$wpdb->prefix}wordpress_liveblog_channels
       DROP COLUMN
         refresh_interval;
     ");

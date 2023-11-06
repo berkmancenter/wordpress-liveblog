@@ -1,7 +1,7 @@
 <?php
 
 use DeliciousBrains\WPMigrations\Database\AbstractMigration;
-use \SlackLiveblog\Db;
+use \WordpressLiveblog\Db;
 
 class AddSortingToChannels extends AbstractMigration {
   public function run() {
@@ -9,7 +9,7 @@ class AddSortingToChannels extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channels
+        {$wpdb->prefix}wordpress_liveblog_channels
       ADD COLUMN
         sorting VARCHAR(20) NOT NULL DEFAULT 'desc';
     ";
@@ -25,7 +25,7 @@ class AddSortingToChannels extends AbstractMigration {
     global $wpdb;
     $wpdb->query("
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channels
+        {$wpdb->prefix}wordpress_liveblog_channels
       DROP COLUMN
         sorting;
     ");

@@ -1,8 +1,8 @@
 <?php
 
 use DeliciousBrains\WPMigrations\Database\AbstractMigration;
-use \SlackLiveblog\Db;
-use \SlackLiveblog\Helpers;
+use \WordpressLiveblog\Db;
+use \WordpressLiveblog\Helpers;
 
 class AddIndexes extends AbstractMigration {
   public function run() {
@@ -10,22 +10,22 @@ class AddIndexes extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channels
+        {$wpdb->prefix}wordpress_liveblog_channels
       ADD INDEX
         slack_id_index (slack_id);
 
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       ADD INDEX
-        channel_id_index (channel_id);
+        liveblog_id_index (liveblog_id);
 
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       ADD UNIQUE INDEX
         slack_id_index (slack_id);
 
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_authors
+        {$wpdb->prefix}wordpress_liveblog_authors
       ADD UNIQUE INDEX
         slack_id_index (slack_id);
     ";
@@ -39,22 +39,22 @@ class AddIndexes extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channels
+        {$wpdb->prefix}wordpress_liveblog_channels
       DROP INDEX
         slack_id_index;
 
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       DROP INDEX
-        channel_id_index;
+        liveblog_id_index;
 
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       DROP INDEX
         slack_id_index;
 
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_authors
+        {$wpdb->prefix}wordpress_liveblog_authors
       DROP INDEX
         slack_id_index;
     ";

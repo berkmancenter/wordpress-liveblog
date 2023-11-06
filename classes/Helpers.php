@@ -1,13 +1,13 @@
 <?php
 
-namespace SlackLiveblog;
+namespace WordpressLiveblog;
 
 /**
  * Class Helpers
  *
  * Utility functions.
  *
- * @package SlackLiveblog
+ * @package WordpressLiveblog
  */
 class Helpers {
   /**

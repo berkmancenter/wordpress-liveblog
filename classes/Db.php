@@ -1,6 +1,6 @@
 <?php
 
-namespace SlackLiveblog;
+namespace WordpressLiveblog;
 
 /**
  * Class Db
@@ -213,6 +213,6 @@ class Db {
    * @return string Full table name with prefix.
    */
   private function get_table($model) {
-    return $this->db->prefix . "slack_liveblog_$model";
+    return $this->db->prefix . "wordpress_liveblog_$model";
   }
 }

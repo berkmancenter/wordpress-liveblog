@@ -8,7 +8,7 @@ class AddPublishAtAndPublishedToChannelMessages extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       ADD COLUMN
         published BOOLEAN NOT NULL DEFAULT true;
     ";
@@ -16,7 +16,7 @@ class AddPublishAtAndPublishedToChannelMessages extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       ADD COLUMN
         publish_at TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3);
     ";
@@ -24,7 +24,7 @@ class AddPublishAtAndPublishedToChannelMessages extends AbstractMigration {
 
     $sql = "
       UPDATE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       SET
       published = false;
     ";
@@ -36,7 +36,7 @@ class AddPublishAtAndPublishedToChannelMessages extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       DROP COLUMN
         published;
     ";
@@ -44,7 +44,7 @@ class AddPublishAtAndPublishedToChannelMessages extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       DROP COLUMN
         publish_at;
     ";

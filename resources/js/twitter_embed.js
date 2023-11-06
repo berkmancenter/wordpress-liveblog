@@ -18,7 +18,7 @@ window.twttr = (function(d, s, id) {
 function checkForNewTwitterEmbeds() {
   if (window.twttr.widgets) {
     window.twttr.widgets.load(
-      document.getElementById('slack-liveblog-app')
+      document.getElementById('wordpress-liveblog-app')
     );
   }
 }

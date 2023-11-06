@@ -8,7 +8,7 @@ class ChangeMessageTimestampPrecision extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       MODIFY COLUMN
         created_at TIMESTAMP(3);
     ";
@@ -20,7 +20,7 @@ class ChangeMessageTimestampPrecision extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       MODIFY COLUMN
         created_at TIMESTAMP;
     ";

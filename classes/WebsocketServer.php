@@ -1,6 +1,6 @@
 <?php
 
-namespace SlackLiveblog;
+namespace WordpressLiveblog;
 
 require '../vendor/autoload.php';
 
@@ -18,7 +18,7 @@ $dotenv->load('../.env');
  *
  * WebSocket server class for handling client connections and messages.
  *
- * @package SlackLiveblog
+ * @package WordpressLiveblog
  */
 class WebsocketServer implements MessageComponentInterface {
   /** @var \SplObjectStorage Collection to store connected clients. */
@@ -38,7 +38,7 @@ class WebsocketServer implements MessageComponentInterface {
     $http_params = [];
     parse_str($conn->httpRequest->getUri()->getQuery(), $http_params);
 
-    $conn->channel_id = $http_params['channel_id'] ?? null;
+    $conn->liveblog_id = $http_params['liveblog_id'] ?? null;
 
     // Store the new connection to send messages to later
     $this->clients->attach($conn);
@@ -55,7 +55,7 @@ class WebsocketServer implements MessageComponentInterface {
     $msg_decoded = json_decode($msg);
 
     foreach ($this->clients as $client) {
-      if ($from !== $client && $client->channel_id === $msg_decoded->channel_id) {
+      if ($from !== $client && $client->liveblog_id === $msg_decoded->liveblog_id) {
         // The sender is not the receiver, send to each client connected
         $client->send($msg);
       }
@@ -87,8 +87,8 @@ class WebsocketServer implements MessageComponentInterface {
 }
 
 // Set up and run a WebSocket server
-$host = $_ENV['SLACK_LIVEBLOG_WS_SERVER_HOST'];
-$port = $_ENV['SLACK_LIVEBLOG_WS_SERVER_PORT'] ?? 8080;
+$host = $_ENV['WORDPRESS_LIVEBLOG_WS_SERVER_HOST'];
+$port = $_ENV['WORDPRESS_LIVEBLOG_WS_SERVER_PORT'] ?? 8080;
 $app = new App($host, $port, '0.0.0.0');
 $app->route('/ws', new WebsocketServer, ['*']);
 $app->run();

@@ -1,17 +1,17 @@
 <?php
 
-namespace SlackLiveblog;
+namespace WordpressLiveblog;
 
 /**
  * Class Menu
  *
  * Handles admin menu related operations.
  *
- * @package SlackLiveblog
+ * @package WordpressLiveblog
  */
 class Menu {
   public function __construct() {
-    add_action('admin_menu', [$this, 'slack_liveblog_add_admin_menu']);
+    add_action('admin_menu', [$this, 'wordpress_liveblog_add_admin_menu']);
   }
 
   /**
@@ -19,9 +19,8 @@ class Menu {
    *
    * @return void
    */
-  public function slack_liveblog_add_admin_menu() {
-    add_menu_page('Liveblog with Slack', 'Liveblog with Slack', 'manage_options', 'slack_liveblog_channels', [AdminCore::$actions, 'slack_liveblog_admin_init'], plugins_url('liveblog-with-slack/resources/img/slack_logo.svg'));
-    add_submenu_page('slack_liveblog_channels', 'Channels', 'Channels', 'manage_options', 'slack_liveblog_channels', [AdminCore::$actions, 'slack_liveblog_admin_init']);
-    add_submenu_page('slack_liveblog_channels', 'Settings', 'Settings', 'manage_options', 'slack_liveblog_settings', [AdminCore::$actions, 'slack_liveblog_admin_init']);
+  public function wordpress_liveblog_add_admin_menu() {
+    add_menu_page('Wordpress Liveblog', 'Wordpress Liveblog', 'manage_options', 'wordpress_liveblog_channels', [AdminCore::$actions, 'wordpress_liveblog_admin_init'], plugins_url('wordpress-liveblog/resources/img/logo.png'));
+    add_submenu_page('wordpress_liveblog_channels', 'Channels', 'Channels', 'manage_options', 'wordpress_liveblog_channels', [AdminCore::$actions, 'wordpress_liveblog_admin_init']);
   }
 }

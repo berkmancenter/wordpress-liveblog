@@ -1,15 +1,13 @@
 <?php
 
-namespace SlackLiveblog;
-
-use JoliCode\Slack\ClientFactory;
+namespace WordpressLiveblog;
 
 /**
  * Class Channels
  *
- * Manages operations related to Slack channels, messages, and authors.
+ * Manages operations related to channels.
  *
- * @package SlackLiveblog
+ * @package WordpressLiveblog
  */
 class Channels {
   /** @var \wpdb|null Instance of the WordPress database abstraction class. */
@@ -20,47 +18,14 @@ class Channels {
   }
 
   /**
-   * Fetches IDs of all open Slack channels.
+   * Fetches IDs of all open channels.
    *
-   * @return array Slack channel IDs.
+   * @return array Channel IDs.
    */
-  public function get_open_channels_slack_ids() {
-    $rows = Db::i()->get_rows('channels', ['slack_id'], ['closed' => '0']);
+  public function get_open_channels_uuids() {
+    $rows = Db::i()->get_rows('channels', ['uuid'], ['closed' => '0']);
 
-    return array_map(function ($c) { return $c->{'slack_id'}; }, $rows);
-  }
-
-  /**
-   * Creates a new Slack channel.
-   *
-   * @param \JoliCode\Slack\Api\Client $client Slack API client.
-   * @param string $name Name of the new channel.
-   * @return \JoliCode\Slack\Api\Model\ObjsConversation Created channel information.
-   */
-  public function create_slack_channel($client, $name) {
-    $new_channel = $client->conversationsCreate([
-      'is_private' => true,
-      'name' => $name
-    ])->getChannel();
-
-    return $new_channel;
-  }
-
-  /**
-   * Invites a user to a Slack channel.
-   *
-   * @param \JoliCode\Slack\Api\Client $client Slack API client.
-   * @param string $channel_id Slack channel ID.
-   * @param string $user_id Slack user ID.
-   * @return bool True if invite was successful, false otherwise.
-   */
-  public function invite_user_to_channel($client, $channel_id, $user_id) {
-    $invite_result = $client->conversationsInvite([
-      'channel' => $channel_id,
-      'users' => $user_id
-    ]);
-
-    return $invite_result->getOk();
+    return array_map(function ($c) { return $c->{'uuid'}; }, $rows);
   }
 
   /**
@@ -71,16 +36,9 @@ class Channels {
   public function get_channels() {
     $query = "
       SELECT
-        ch.*,
-        wo.name AS workspace_name,
-        wo.id AS workspace_id,
-        wo.team_id AS workspace_team_id
+        ch.*
       FROM
-        {$this->database->prefix}slack_liveblog_channels ch
-      LEFT JOIN
-        {$this->database->prefix}slack_liveblog_workspaces wo
-        ON
-        ch.workspace_id = wo.id
+        {$this->database->prefix}wordpress_liveblog_channels ch
     ";
 
     return $this->database->get_results($query);
@@ -102,7 +60,7 @@ class Channels {
    * @param array $data Associative array of message data.
    * @return object Created message information.
    */
-  public function create_local_message($data) {
+  public function create_message($data) {
     Db::i()->insert_row('channel_messages', $data);
 
     $message_id = Db::i()->get_last_inserted_id();
@@ -140,30 +98,19 @@ class Channels {
   /**
    * Creates a new author record.
    *
-   * @param string $slack_id Slack ID of the author.
-   * @param string $workspace_id Workspace ID.
    * @return object Created author information.
    */
-  public function create_new_author($slack_id, $workspace_id) {
-    $workspace = Db::i()->get_row('workspaces', ['*'], ['id' => $workspace_id]);
-
-    $client = ClientFactory::create($workspace->access_token);
-    $user = $client->usersInfo(
-      [
-        'user' => $slack_id
-      ]
-    )->getUser();
-
+  public function create_new_author($name) {
     $query = "
-      INSERT INTO {$this->database->prefix}slack_liveblog_authors
-        (slack_id, name, image)
+      INSERT INTO {$this->database->prefix}wordpress_liveblog_authors
+        (name, image)
       VALUES
-        (%s, %s, %s)
+        (%s, %s)
     ";
 
     $query = $this->database->prepare(
       $query,
-      [$slack_id, $user->getRealName(), '']
+      [$name, '']
     );
 
     $this->database->query($query);
@@ -174,20 +121,19 @@ class Channels {
   }
 
   /**
-   * Fetches an existing author or creates a new one based on Slack ID.
+   * Fetches an existing author or creates a new one based on name.
    *
-   * @param string $slack_id Slack ID of the author.
-   * @param string $workspace_id Workspace ID.
+   * @param string $name Name of the author.
    * @return object Author information.
    */
-  public function get_or_create_author_by_slack_id($slack_id, $workspace_id) {
-    $existing_author = $this->get_author($slack_id, 'slack_id');
+  public function get_or_create_author_by_name($name) {
+    $existing_author = $this->get_author($name, 'name');
 
     if ($existing_author) {
       return $existing_author;
     }
 
-    return $this->create_new_author($slack_id, $workspace_id);
+    return $this->create_new_author($name);
   }
 
   /**
@@ -235,9 +181,9 @@ class Channels {
         cm.created_at AS created_at,
         cm.id AS id
       FROM
-        {$this->database->prefix}slack_liveblog_channel_messages cm
+        {$this->database->prefix}wordpress_liveblog_channel_messages cm
       LEFT JOIN
-        {$this->database->prefix}slack_liveblog_authors a
+        {$this->database->prefix}wordpress_liveblog_authors a
         ON
         cm.author_id = a.id
       WHERE
@@ -258,7 +204,7 @@ class Channels {
    * @param array $where Associative array of conditions.
    * @return int Number of rows updated.
    */
-  public function update_local_message($data, $where) {
+  public function update_message($data, $where) {
     return Db::i()->update_row('channel_messages', $data, $where);
   }
 
@@ -270,7 +216,7 @@ class Channels {
   public function publish_delayed_messages() {
     $sql = "
       UPDATE
-        {$this->database->prefix}slack_liveblog_channel_messages
+        {$this->database->prefix}wordpress_liveblog_channel_messages
       SET
         published = 1,
         updated_at = CURRENT_TIMESTAMP(3)

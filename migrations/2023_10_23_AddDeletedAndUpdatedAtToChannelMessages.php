@@ -8,7 +8,7 @@ class AddDeletedAndUpdatedAtToChannelMessages extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       ADD COLUMN
         updated_at TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3);
     ";
@@ -16,7 +16,7 @@ class AddDeletedAndUpdatedAtToChannelMessages extends AbstractMigration {
 
     $sql = "
       UPDATE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       SET
         updated_at = created_at;
     ";
@@ -24,7 +24,7 @@ class AddDeletedAndUpdatedAtToChannelMessages extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       ADD COLUMN
         deleted BOOLEAN NOT NULL DEFAULT false;
     ";
@@ -36,7 +36,7 @@ class AddDeletedAndUpdatedAtToChannelMessages extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       DROP COLUMN
         updated_at;
     ";
@@ -44,7 +44,7 @@ class AddDeletedAndUpdatedAtToChannelMessages extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       DROP COLUMN
         deleted;
     ";

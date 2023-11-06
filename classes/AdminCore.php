@@ -1,21 +1,19 @@
 <?php
 
-namespace SlackLiveblog;
+namespace WordpressLiveblog;
 
 /**
  * Class AdminCore
  *
  * Handles administrative functionalities for the plugin.
  *
- * @package SlackLiveblog
+ * @package WordpressLiveblog
  */
 class AdminCore {
   /** @var Menu|null Menu module instance. */
   public static $menu = null;
   /** @var Channels|null Channels module instance. */
   public static $channels = null;
-  /** @var Workspaces|null Workspacess module instance. */
-  public static $workspaces = null;
   /** @var AdminActions|null AdminActions module instance. */
   public static $actions = null;
 
@@ -37,7 +35,6 @@ class AdminCore {
   private static function init_modules() {
     self::$menu = new Menu();
     self::$channels = new Channels();
-    self::$workspaces = new Workspaces();
     self::$actions = new AdminActions();
   }
 
@@ -48,7 +45,7 @@ class AdminCore {
    */
   private static function init_actions() {
     add_action('admin_enqueue_scripts', [self::class, 'add_assets']);
-    add_action('wp_ajax_slack_liveblog_admin', [self::$actions, 'slack_liveblog_ajax_actions']);
+    add_action('wp_ajax_wordpress_liveblog_admin', [self::$actions, 'wordpress_liveblog_ajax_actions']);
   }
 
   /**
@@ -57,9 +54,9 @@ class AdminCore {
    * @return void
    */
   public static function add_assets() {
-    wp_enqueue_script('slack_liveblog_admin_vendor', plugins_url('dist/admin/vendor.js', dirname(__FILE__)), []);
-    wp_enqueue_style('slack_liveblog_admin_vendor', plugins_url('dist/admin/vendor.css', dirname(__FILE__)), []);
-    wp_enqueue_style('slack_liveblog_admin', plugins_url('resources/css/admin.css', dirname(__FILE__)), []);
-    wp_enqueue_script('slack_liveblog_admin', plugins_url('resources/js/admin.js', dirname(__FILE__)), []);
+    wp_enqueue_script('wordpress_liveblog_admin_vendor', plugins_url('dist/admin/vendor.js', dirname(__FILE__)), []);
+    wp_enqueue_style('wordpress_liveblog_admin_vendor', plugins_url('dist/admin/vendor.css', dirname(__FILE__)), []);
+    wp_enqueue_style('wordpress_liveblog_admin', plugins_url('resources/css/admin.css', dirname(__FILE__)), []);
+    wp_enqueue_script('wordpress_liveblog_admin', plugins_url('resources/js/admin.js', dirname(__FILE__)), []);
   }
 }

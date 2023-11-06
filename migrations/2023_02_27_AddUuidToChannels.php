@@ -1,8 +1,8 @@
 <?php
 
 use DeliciousBrains\WPMigrations\Database\AbstractMigration;
-use \SlackLiveblog\Db;
-use \SlackLiveblog\Helpers;
+use \WordpressLiveblog\Db;
+use \WordpressLiveblog\Helpers;
 
 class AddUuidToChannels extends AbstractMigration {
   public function run() {
@@ -10,7 +10,7 @@ class AddUuidToChannels extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channels
+        {$wpdb->prefix}wordpress_liveblog_channels
       ADD COLUMN
         uuid VARCHAR(36) NOT NULL;
     ";
@@ -26,7 +26,7 @@ class AddUuidToChannels extends AbstractMigration {
     global $wpdb;
     $wpdb->query("
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channels
+        {$wpdb->prefix}wordpress_liveblog_channels
       DROP COLUMN
         uuid;
     ");

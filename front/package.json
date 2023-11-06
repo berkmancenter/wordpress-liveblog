@@ -1,5 +1,5 @@
 {
-  "name": "liveblog-with-slack",
+  "name": "wordpress-liveblog",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,7 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "awesome-notifications": "^3.1.3",
     "lodash": "^4.17.21",
+    "tinymce": "^6",
     "vue": "^3.2.45"
   },
   "devDependencies": {

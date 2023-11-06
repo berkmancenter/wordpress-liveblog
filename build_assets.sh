@@ -1,7 +1,7 @@
 #!/bin/bash
 
-VENDOR_CSS=dist/vendor.css
-VENDOR_JS=dist/vendor.js
+VENDOR_CSS=dist/admin/vendor.css
+VENDOR_JS=dist/admin/vendor.js
 
 echo '' > $VENDOR_CSS
 echo '' > $VENDOR_JS

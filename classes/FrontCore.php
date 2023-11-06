@@ -1,13 +1,13 @@
 <?php
 
-namespace SlackLiveblog;
+namespace WordpressLiveblog;
 
 /**
  * Class FrontCore
  *
  * Initializes front-end modules and assets.
  *
- * @package SlackLiveblog
+ * @package WordpressLiveblog
  */
 class FrontCore {
   /** @var Events|null Events module instance. */
@@ -57,8 +57,8 @@ class FrontCore {
    */
   public static function add_assets() {
     // Enqueue frontend main scripts and styles
-    wp_enqueue_script('slack_liveblog_front_liveblog_index', plugins_url('dist/front/index.js', dirname(__FILE__)), []);
-    wp_enqueue_style('slack_liveblog_front_liveblog', plugins_url('dist/front/index.css', dirname(__FILE__)), []);
+    wp_enqueue_script('wordpress_liveblog_front_liveblog_index', plugins_url('dist/front/index.js', dirname(__FILE__)), []);
+    wp_enqueue_style('wordpress_liveblog_front_liveblog', plugins_url('dist/front/index.css', dirname(__FILE__)), []);
     
     // Enqueue embed scripts
     $embed_scripts = [
@@ -68,7 +68,7 @@ class FrontCore {
     ];
 
     foreach ($embed_scripts as $key => $path) {
-      wp_enqueue_script("slack_liveblog_front_liveblog_{$key}_embed", plugins_url($path, dirname(__FILE__)), []);
+      wp_enqueue_script("wordpress_liveblog_front_liveblog_{$key}_embed", plugins_url($path, dirname(__FILE__)), []);
     }
   }
 }

@@ -1,4 +1,4 @@
-=== Liveblog with Slack ===
+=== Wordpress Liveblog ===
 Contributors: berkmancenter
 Donate link: https://cyber.harvard.edu
 Tags: slack, blog
@@ -9,11 +9,11 @@ Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Liveblog with Slack connects your WordPress website and your Slack workspace. Sync up a post or page to a Slack channel!
+Wordpress Liveblog connects your WordPress website and your Slack workspace. Sync up a post or page to a Slack channel!
 
 == Description ==
 
-Liveblog with Slack is a WordPress plugin designed to bridge the gap between your WordPress website and your Slack workspace. The plugin allows you to establish a seamless connection between a specific WordPress post or page and a corresponding Slack channel, ensuring that every message, update, or edit made in the channel is synced in real-time to the WordPress post.
+Wordpress Liveblog is a WordPress plugin designed to bridge the gap between your WordPress website and your Slack workspace. The plugin allows you to establish a seamless connection between a specific WordPress post or page and a corresponding Slack channel, ensuring that every message, update, or edit made in the channel is synced in real-time to the WordPress post.
 
 Currently Supported:
 
@@ -30,17 +30,17 @@ Missing functionalities:
 
 == Installation ==
 
-To create a new channel and link it to the Liveblog with Slack, follow these steps:
+To create a new channel and link it to the Wordpress Liveblog, follow these steps:
 
-1. Navigate to `wp-admin/admin.php?page=slack_liveblog_settings`.
+1. Navigate to `wp-admin/admin.php?page=wordpress_liveblog_settings`.
 1. Connect a new Slack workspace.
-1. Navigate to `wp-admin/admin.php?page=slack_liveblog_channels`.
+1. Navigate to `wp-admin/admin.php?page=wordpress_liveblog_channels`.
 1. Enter the `Slack member ID` for the person you wish to invite to the new channel. For instructions on how to find this ID, see [here](https://moshfeu.medium.com/how-to-find-my-member-id-in-slack-workspace-d4bba942e38c).
 1. Enter a name for the new channel. Channel names can include lowercase letters, non-Latin characters, numbers, and hyphens, and must be unique in your workspace. There is a 21 character limit.
 1. Click `Generate new channel`.
 1. The new channel will now appear in your workspace.
 1. The person you specified earlier will receive an invitation to the new channel.
-1. Copy the shortcode from the list (it will look something like this: `[slack_liveblog channel_id="XXXXXXXX"/]`).
+1. Copy the shortcode from the list (it will look something like this: `[wordpress_liveblog liveblog_id="XXXXXXXX"/]`).
 1. Paste the shortcode on any post or page where you want the live blog to appear.
 1. Return to Slack, invite other users to the channel and start live blogging.
 
@@ -48,19 +48,19 @@ Note that you can choose to close the channel to new updates at any time by clos
 
 To *optionally* use the WebSocket server, set these enviornment variables:
 
-* `SLACK_LIVEBLOG_USE_WEBSOCKETS`
+* `WORDPRESS_LIVEBLOG_USE_WEBSOCKETS`
 ** **Description:** Tells the plugin to use the WebSocket server
 ** **Default:** false
 ** **Required:** Yes
-* `SLACK_LIVEBLOG_WS_SERVER_CLIENT_URL`
+* `WORDPRESS_LIVEBLOG_WS_SERVER_CLIENT_URL`
 ** **Description:** URL that clients will connect to the WebSocket server
 ** **Default:**
 ** **Required:** Yes
-* `SLACK_LIVEBLOG_WS_SERVER_HOST`
-** **Description:** Host part of the `SLACK_LIVEBLOG_WS_SERVER_CLIENT_URL`
+* `WORDPRESS_LIVEBLOG_WS_SERVER_HOST`
+** **Description:** Host part of the `WORDPRESS_LIVEBLOG_WS_SERVER_CLIENT_URL`
 ** **Default:**
 ** **Required:** Yes
-* `SLACK_LIVEBLOG_WS_SERVER_PORT`
+* `WORDPRESS_LIVEBLOG_WS_SERVER_PORT`
 ** **Description:** Custom WebSocket server port
 ** **Default:** 8080
 ** **Required:** No

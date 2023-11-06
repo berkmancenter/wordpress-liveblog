@@ -1,13 +1,13 @@
 <?php
 
-namespace SlackLiveblog;
+namespace WordpressLiveblog;
 
 /**
  * Class PluginSettings
  *
  * Manages plugin settings.
  *
- * @package SlackLiveblog
+ * @package WordpressLiveblog
  */
 class PluginSettings {
   /** @var PluginSettings|null Singleton instance */
@@ -24,7 +24,7 @@ class PluginSettings {
   public static function i(): PluginSettings {
     if (self::$instance === null) {
       self::$instance = new PluginSettings();
-      self::$instance->cached_database_settings = get_option('slack_liveblog_settings');
+      self::$instance->cached_database_settings = get_option('wordpress_liveblog_settings');
     }
 
     return self::$instance;

@@ -6,7 +6,7 @@ class CreateTables extends AbstractMigration {
   public function run() {
     global $wpdb;
 
-    $sql = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}slack_liveblog_channels (
+    $sql = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}wordpress_liveblog_channels (
       id MEDIUMINT NOT NULL AUTO_INCREMENT,
       name VARCHAR(777) NOT NULL,
       slack_id VARCHAR(20) NOT NULL,
@@ -16,9 +16,9 @@ class CreateTables extends AbstractMigration {
     );";
     dbDelta($sql);
 
-    $sql = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}slack_liveblog_channel_messages (
+    $sql = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}wordpress_liveblog_channel_messages (
       id MEDIUMINT NOT NULL AUTO_INCREMENT,
-      channel_id MEDIUMINT NOT NULL,
+      liveblog_id MEDIUMINT NOT NULL,
       message TEXT DEFAULT '',
       author_id MEDIUMINT NOT NULL,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -26,7 +26,7 @@ class CreateTables extends AbstractMigration {
     );";
     dbDelta($sql);
 
-    $sql = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}slack_liveblog_authors (
+    $sql = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}wordpress_liveblog_authors (
       id MEDIUMINT NOT NULL AUTO_INCREMENT,
       slack_id VARCHAR(20) NOT NULL,
       name VARCHAR(777) NOT NULL,
@@ -39,8 +39,8 @@ class CreateTables extends AbstractMigration {
 
   public function rollback() {
     global $wpdb;
-    $wpdb->query('DROP TABLE ' . $wpdb->prefix . 'slack_liveblog_channels');
-    $wpdb->query('DROP TABLE ' . $wpdb->prefix . 'slack_liveblog_channel_messages');
-    $wpdb->query('DROP TABLE ' . $wpdb->prefix . 'slack_liveblog_authors');
+    $wpdb->query('DROP TABLE ' . $wpdb->prefix . 'wordpress_liveblog_channels');
+    $wpdb->query('DROP TABLE ' . $wpdb->prefix . 'wordpress_liveblog_channel_messages');
+    $wpdb->query('DROP TABLE ' . $wpdb->prefix . 'wordpress_liveblog_authors');
   }
 }

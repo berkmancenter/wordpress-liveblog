@@ -1,13 +1,13 @@
 <?php
 
-namespace SlackLiveblog;
+namespace WordpressLiveblog;
 
 /**
  * Class FrontActions
  *
  * Handles front-end actions for the plugin.
  *
- * @package SlackLiveblog
+ * @package WordpressLiveblog
  */
 class FrontActions {
   public function __construct() {
@@ -30,11 +30,11 @@ class FrontActions {
    * @return void
    */
   private function get_channel_messages() {
-    if (($_GET['action'] ?? '') !== 'slack_liveblog_get_channel_messages' || !isset($_GET['channel_id'])) {
+    if (($_GET['action'] ?? '') !== 'wordpress_liveblog_get_channel_messages' || !isset($_GET['liveblog_id'])) {
       return;
     }
 
-    $channel_uuid = preg_replace('/[^a-zA-Z0-9\-]/', '', filter_input(INPUT_GET, 'channel_id'));
+    $channel_uuid = preg_replace('/[^a-zA-Z0-9\-]/', '', filter_input(INPUT_GET, 'liveblog_id'));
     $channel = FrontCore::$channels->get_channel(['uuid' => $channel_uuid]);
 
     if (!$channel) {
@@ -76,7 +76,7 @@ class FrontActions {
       'id' => $message->id,
       'body' => $message->message,
       'author' => $message->name,
-      'created_at' => $message->remote_created_at,
+      'created_at' => $message->created_at,
     ];
   }
 }

@@ -8,7 +8,7 @@ class AddRemoteCreatedAtToChannelMessages extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       ADD COLUMN
         remote_created_at TIMESTAMP(3) NOT NULL;
     ";
@@ -16,7 +16,7 @@ class AddRemoteCreatedAtToChannelMessages extends AbstractMigration {
 
     $sql = "
       UPDATE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       SET
         remote_created_at = created_at;
     ";
@@ -28,7 +28,7 @@ class AddRemoteCreatedAtToChannelMessages extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       DROP COLUMN
         remote_created_at;
     ";

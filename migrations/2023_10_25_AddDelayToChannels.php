@@ -1,7 +1,7 @@
 <?php
 
 use DeliciousBrains\WPMigrations\Database\AbstractMigration;
-use \SlackLiveblog\Db;
+use \WordpressLiveblog\Db;
 
 class AddDelayToChannels extends AbstractMigration {
   public function run() {
@@ -9,7 +9,7 @@ class AddDelayToChannels extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channels
+        {$wpdb->prefix}wordpress_liveblog_channels
       ADD COLUMN
         delay SMALLINT NOT NULL DEFAULT 0;
     ";
@@ -17,7 +17,7 @@ class AddDelayToChannels extends AbstractMigration {
 
     $sql = "
       UPDATE
-        {$wpdb->prefix}slack_liveblog_channels
+        {$wpdb->prefix}wordpress_liveblog_channels
       SET
         delay = 0;
     ";
@@ -28,7 +28,7 @@ class AddDelayToChannels extends AbstractMigration {
     global $wpdb;
     $wpdb->query("
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channels
+        {$wpdb->prefix}wordpress_liveblog_channels
       DROP COLUMN
         delay;
     ");

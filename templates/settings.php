@@ -14,14 +14,14 @@
               <tr>
                 <th>Workspace name</th>
                 <td>
-                  <input type="text" class="slack-liveblog-settings-workspace-name" data-key="workspace_name" required>
+                  <input type="text" class="wordpress-liveblog-settings-workspace-name" data-key="workspace_name" required>
                   <p class="description" id="tagline-description">Name your workspace to easier identify it later when you create a new channel.</p>
                 </td>
               </tr>
               <tr>
                 <th>Slack configuration access token</th>
                 <td>
-                  <input type="text" class="slack-liveblog-settings-app-config-token" data-key="access_token" required>
+                  <input type="text" class="wordpress-liveblog-settings-app-config-token" data-key="access_token" required>
                   <p class="description" id="tagline-description">Get it here <a target="_blank" href="https://api.slack.com/authentication/config-tokens" target="_blank">https://api.slack.com/authentication/config-tokens</a>. Check the "Creating configuration tokens" section and generate it for a workspace you want to connect.</p>
                 </td>
               </tr>
@@ -29,13 +29,13 @@
           </table>
 
           <button
-            class="slack-liveblog-button slack-liveblog-ajax-action"
+            class="wordpress-liveblog-button wordpress-liveblog-ajax-action"
             data-action="connect-workspace"
-            data-elements-submit=".slack-liveblog-settings-app-config-token,.slack-liveblog-settings-workspace-name"
+            data-elements-submit=".wordpress-liveblog-settings-app-config-token,.wordpress-liveblog-settings-workspace-name"
             data-success-message="New workspace has been connected successfully."
             data-success-callback="createdWorkspace"
           >
-            <img src="<?php echo plugins_url('liveblog-with-slack/resources/img/slack_logo.svg') ?>">
+            <img src="<?php echo plugins_url('wordpress-liveblog/resources/img/slack_logo.svg') ?>">
             Connect new Slack workspace
           </button>
         </form>
@@ -55,7 +55,7 @@
 
       <div class="inside">
         <?php if (count($variables['workspaces']) > 0): ?>
-          <table class="slack-liveblog-workspaces-list wp-list-table widefat fixed striped table-view-list">
+          <table class="wordpress-liveblog-workspaces-list wp-list-table widefat fixed striped table-view-list">
             <thead>
               <tr>
                 <th>Name</th>

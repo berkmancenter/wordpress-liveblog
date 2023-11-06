@@ -1,13 +1,13 @@
 <?php
 
-namespace SlackLiveblog;
+namespace WordpressLiveblog;
 
 /**
  * Class Templates
  *
  * Manages template loading and rendering.
  *
- * @package SlackLiveblog
+ * @package WordpressLiveblog
  */
 class Templates {
  /**

@@ -6,7 +6,7 @@ class CreateWorkspaces extends AbstractMigration {
   public function run() {
     global $wpdb;
 
-    $sql = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}slack_liveblog_workspaces (
+    $sql = "CREATE TABLE IF NOT EXISTS {$wpdb->prefix}wordpress_liveblog_workspaces (
       id MEDIUMINT NOT NULL AUTO_INCREMENT,
       name TINYTEXT NOT NULL,
       team_id TINYTEXT NOT NULL,
@@ -23,7 +23,7 @@ class CreateWorkspaces extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channels
+        {$wpdb->prefix}wordpress_liveblog_channels
       ADD COLUMN
         workspace_id INT NOT NULL,
       ADD INDEX
@@ -35,7 +35,7 @@ class CreateWorkspaces extends AbstractMigration {
   public function rollback() {
     global $wpdb;
 
-    $wpdb->query('DROP TABLE ' . $wpdb->prefix . 'slack_liveblog_workspaces');
-    $wpdb->query('ALTER TABLE ' . $wpdb->prefix . 'slack_liveblog_channels DROP INDEX workspace_id_index');
+    $wpdb->query('DROP TABLE ' . $wpdb->prefix . 'wordpress_liveblog_workspaces');
+    $wpdb->query('ALTER TABLE ' . $wpdb->prefix . 'wordpress_liveblog_channels DROP INDEX workspace_id_index');
   }
 }

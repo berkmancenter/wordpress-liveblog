@@ -13,3 +13,6 @@ composer.phar
 .env
 
 /dist/front/index.html
+
+docs/.build
+.phpdoc

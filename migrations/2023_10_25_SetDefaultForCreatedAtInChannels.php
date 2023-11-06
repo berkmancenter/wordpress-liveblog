@@ -8,7 +8,7 @@ class SetDefaultForCreatedAtInChannels extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       MODIFY
         created_at TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3);
     ";
@@ -19,7 +19,7 @@ class SetDefaultForCreatedAtInChannels extends AbstractMigration {
     global $wpdb;
     $wpdb->query("
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channel_messages
+        {$wpdb->prefix}wordpress_liveblog_channel_messages
       MODIFY
         created_at TIMESTAMP(3) DEFAULT NULL;
     ");

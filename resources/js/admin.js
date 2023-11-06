@@ -5,7 +5,7 @@ const notifier = new AWN({
   position: 'top-right',
 })
 
-jQuery(document).on('click', '.slack-liveblog-ajax-action', (ev) => {
+jQuery(document).on('click', '.wordpress-liveblog-ajax-action', (ev) => {
   ev.preventDefault();
 
   const el = jQuery(ev.target)
@@ -14,7 +14,7 @@ jQuery(document).on('click', '.slack-liveblog-ajax-action', (ev) => {
   const successCallback = el.data('success-callback')
   const subAction = el.data('action')
   let body = ({
-    action: 'slack_liveblog_admin',
+    action: 'wordpress_liveblog_admin',
     sub_action: subAction,
   })
 
@@ -45,7 +45,7 @@ jQuery(document).on('click', '.slack-liveblog-ajax-action', (ev) => {
 const slackLiveblogAdminActionsCallbacks = {
   closedChange: (response, body) => {
     const parent = jQuery(`tr[data-id="${body.id}"]`)
-    const valueEl = parent.find(`.slack-liveblog-channels-list-status-${body.id}`).first()
+    const valueEl = parent.find(`.wordpress-liveblog-channels-list-status-${body.id}`).first()
     const linkEl = parent.find('[data-action="channel-toggle"]').first()
     const currentStatusEl = linkEl.prev()
     const updatedValue = valueEl.val()
@@ -65,7 +65,7 @@ const slackLiveblogAdminActionsCallbacks = {
   },
   createdChannel: (response) => {
     const body = ({
-      action: 'slack_liveblog_admin',
+      action: 'wordpress_liveblog_admin',
       sub_action: 'channels-list',
     })
 
@@ -73,7 +73,7 @@ const slackLiveblogAdminActionsCallbacks = {
       ajaxurl,
       body,
       (response) => {
-        jQuery('.slack-liveblog-channels-parent').html(response)
+        jQuery('.wordpress-liveblog-channels-parent').html(response)
       },
     )
   },

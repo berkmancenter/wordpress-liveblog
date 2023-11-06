@@ -1,10 +1,9 @@
 {
-  "name": "berkmancenter/wordpress-slack-liveblog",
+  "name": "berkmancenter/wordpress-liveblog",
   "require": {
     "cweagans/composer-patches": "^1.7",
     "symfony/http-client": "^5.4",
     "nyholm/psr7": "^1.5",
-    "jolicode/slack-php-api": "^4.5",
     "symfony/dotenv": "^5.4",
     "cboden/ratchet": "^0.4.4",
     "ratchet/pawl": "^0.4.1",
@@ -21,6 +20,6 @@
     "patches": {}
   },
   "autoload": {
-    "psr-4": {"SlackLiveblog\\": "classes/"}
+    "psr-4": {"WordpressLiveblog\\": "classes/"}
   }
 }

@@ -8,7 +8,7 @@ class AddClosedToChannels extends AbstractMigration {
 
     $sql = "
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channels
+        {$wpdb->prefix}wordpress_liveblog_channels
       ADD COLUMN
         closed boolean NOT NULL DEFAULT false;
     ";
@@ -19,7 +19,7 @@ class AddClosedToChannels extends AbstractMigration {
     global $wpdb;
     $wpdb->query("
       ALTER TABLE
-        {$wpdb->prefix}slack_liveblog_channels
+        {$wpdb->prefix}wordpress_liveblog_channels
       DROP COLUMN
         closed"
     );

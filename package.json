@@ -1,5 +1,5 @@
 {
-  "name": "liveblog-with-slack",
+  "name": "wordpress-liveblog",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
